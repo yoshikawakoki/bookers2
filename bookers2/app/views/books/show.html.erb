@@ -16,10 +16,28 @@
     <th>
       <%= @book.body %>
     </th>
+    <th>
+
+    </th>
     <% if @book.user.id == current_user.id %>
     <th><%= link_to "Edit", edit_book_path, class: "btn btn-sm btn-success" %></th>
     <th><%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger" %></th>
     <% end %>
+    <th>
+      <% if @book.favorited_by?(current_user) %>
+      <p>
+        <%= link_to book_favorites_path(@book), method: :delete do %>
+          ♥<%= @book.favorites.count %>
+        <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to book_favorites_path(@book), method: :create do %>
+          ♡<%= @book.favorites.count %>
+        <% end %>
+      </p>
+        <% end %>
+    </th>
   </tr>
 </table>
 </div>

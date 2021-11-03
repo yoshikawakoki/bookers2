@@ -1,8 +1,8 @@
 class CreateFavotites < ActiveRecord::Migration[5.2]
   def change
     create_table :favotites do |t|
-      t.integer :user_id
-      t.integer :post_image_id
+      t.references :user, foreign_key: true, null: false
+      t.references :book, foreign_key: true, null: false
 
       t.timestamps
     end
