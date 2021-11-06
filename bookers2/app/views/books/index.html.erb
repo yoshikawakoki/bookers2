@@ -1,12 +1,12 @@
 <main>
- <% if @book.errors.any? %>
-  <%= @book.errors.count %>件のerrorが発生しました
-  <% @book.errors.full_messages.each do |message| %>
+ <% if @book_new.errors.any? %>
+  <%= @book_new.errors.count %>件のerrorが発生しました
+  <% @book_new.errors.full_messages.each do |message| %>
    <%= message %>
    <% end %>
    <% end %>
 
-      <%= render "books/list", book: @book, user: @user %>
+      <%= render "books/list", book: @book_new, user: @user %>
 
 
         <h2>Books</h2>
@@ -29,23 +29,11 @@
               </th>
               <th><%= link_to book.title, book_path(book.id) %></th>
               <th><%= book.body %></th>
-              <th>
-                <% if book.favorited_by?(current_user) %>
-                  <p>
-                    <%= link_to book_favorites_path(book), method: :delete do %>
-                      ♥<%= book.favorites.count %>
-                    <% end %>
-                  </p>
-                  <% else %>
-                  <p>
-                    <%= link_to book_favorites_path(book), method: :create do %>
-                      ♡<%= book.favorites.count %>
-                  <% end %>
-                  </p>
-                <% end %>
+              <th id="favorite_buttons_<%= book.id %>">
+                <%= render partial: "books/favorite", locals: { book: book } %>
               </th>
               <th>
-                <p>コメント数：<%= book.book_comments.count%></p>
+                <p>コメント数：<%= book.book_comments.count %></p>
               </th>
             </tr>
           </div>
