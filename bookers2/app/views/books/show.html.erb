@@ -2,7 +2,7 @@
 
 <h2>Book detail</h2>
 <table class="table">
-  <tr>
+  <tr id="book_<%= @book.id %>">
     <th>
       <%= link_to user_path(@book.user.id) do %>
       <%= attachment_image_tag @user, :profile_image, fallback: "no_image.png", size: "40x40" %>
@@ -23,8 +23,8 @@
     <th><%= link_to "Edit", edit_book_path, class: "btn btn-sm btn-success" %></th>
     <th><%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger" %></th>
     <% end %>
-    <th id="favorites_buttons_<%= @book.id %>">
-      <%= render partial: "books/favorite", locals: { book: @book } %>
+    <th class="favorite_button">
+      <%= render "favorites/favorite", book: @book %>
     </th>
     <th>
       <p>コメント数：<%= @book.book_comments.count%></p>
