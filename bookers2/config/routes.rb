@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'relationships/followings'
   get 'relationships/followers'
   devise_for :users
-  root to: "homes#top"
+  root to: "homes#top" 
 
   resources :books, only: [:index, :create, :show, :edit, :destroy, :update] do
     resource :favorites, only: [:create, :destroy]
